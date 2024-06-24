@@ -68,11 +68,11 @@
   
 
   <main class="post-content"><p>我的电脑上一共安装了两个版本的JDK，一个是最新版的JDK12，一个是JDK1.8（用来跑一些比较老的项目）</p>
-<p>我先安装了JDK12，按照JAVA_HOME, CLASSPATH, Path的顺序配好之后，运行正常，</p>
+<p>首先安装了JDK12，按照JAVA_HOME, CLASSPATH, Path的顺序配好之后，运行正常。</p>
 <p>但是我在继续配置好了JDK1.8之后，却出了这样的问题：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error: could not find java.dll</span><br><span class="line"></span><br><span class="line">Error: Could not find Java SE Runtime Environment.</span><br></pre></td></tr></table></figure>
 
-<p>于是我就上网百度出现这个问题的原因，解决方法主要有两个：</p>
+<p>上网百度后，解决方法主要有两个：</p>
 <ul>
 <li><p>把Path中对应JDK1.8的配置一直上移至顶端</p>
 </li>
@@ -80,7 +80,7 @@
 </li>
 </ul>
 <p>可是我在试了之后，并没有什么作用（我在尝试第二种方法的时候甚至发现我在C:\Windows\System32这个路径下并没有java.exe文件……）</p>
-<p>终于，在一筹莫展的时候，我看到了一篇博客，建议可以重启电脑试一下，照做之后，果然运行成功。</p>
+<p>终于，在一筹莫展的时候，我看到了一篇博客，建议可以重启电脑试一下，照做之后，果然运行成功🥳。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/K11yann/BlogImage@main/img/%E5%9B%BE24.png" alt="安装成功"></p>
 <p>重启之后电脑才会重新识别Path路径哦！</p>
 </main>
