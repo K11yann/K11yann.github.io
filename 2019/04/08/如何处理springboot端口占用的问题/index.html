@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    如何处理springboot端口占用的问题 丨
+    
+
+    K11yann&#39;s
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">Yiyan Kong</a>
+    <ul class="nav">
+      
+      <li><a href="/">home</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+      <li><a href="/archives">archives</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">如何处理springboot端口占用的问题</div>
+  <div class="post-meta">
+    <div class="date">April 8th 2019</div>
+    <div class="tags">
+      
+      <div class="tag-item">Springboot</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><ul>
+<li><a href="#1-%E9%97%AE%E9%A2%98">1 问题</a></li>
+<li><a href="#2-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">2 解决方案</a><ul>
+<li><a href="#%E6%89%BE%E5%88%B08080%E7%AB%AF%E5%8F%A3">找到8080端口</a></li>
+<li><a href="#%E6%89%BE%E5%88%B0%E8%BF%9B%E7%A8%8B">找到进程</a></li>
+<li><a href="#%E6%9D%80%E6%8E%89%E8%BF%9B%E7%A8%8B">杀掉进程</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%8E%9F%E5%9B%A0">3 出现问题的原因</a></li>
+</ul>
+<h2 id="1-问题"><a href="#1-问题" class="headerlink" title="1 问题"></a>1 问题</h2><p>我在运行Springboot时出现了这样的问题：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Description:</span><br><span class="line"></span><br><span class="line">The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connecter may be misconfig...</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K11yann/BlogImage@main/img/%E5%9B%BE25.png" alt="报错截图"></p>
+<h2 id="2-解决方案"><a href="#2-解决方案" class="headerlink" title="2 解决方案"></a>2 解决方案</h2><h3 id="找到8080端口"><a href="#找到8080端口" class="headerlink" title="找到8080端口"></a>找到8080端口</h3><p>win+R进入命令行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano</span><br></pre></td></tr></table></figure>
+
+<p>这个命令是用来查看你当前所有在用的端口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K11yann/BlogImage@main/img/%E5%9B%BE26.png" alt="命令截图"></p>
+<p>输入后在TCP那里找到8080端口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K11yann/BlogImage@main/img/%E5%9B%BE27.png" alt="8080端口"></p>
+<h3 id="找到进程"><a href="#找到进程" class="headerlink" title="找到进程"></a>找到进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist  |  findster &quot;4404&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里双引号中的数字应该是上面LISTENING后面跟的数字），这个命令是用来列出当前占用这个端口号的应用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K11yann/BlogImage@main/img/%E5%9B%BE28.png" alt="找到端口"></p>
+<h3 id="杀掉进程"><a href="#杀掉进程" class="headerlink" title="杀掉进程"></a>杀掉进程</h3><p>输入命令终止该程序即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /f /t /im java.exe</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K11yann/BlogImage@main/img/%E5%9B%BE29.png" alt="杀掉进程"></p>
+<h2 id="3-出现问题的原因"><a href="#3-出现问题的原因" class="headerlink" title="3 出现问题的原因"></a>3 出现问题的原因</h2><p>之所以会出现端口被占用的问题，是因为springboot中本身就带了Tomcat，其默认的端口号也是8080，所以会和本地Tomcat的端口起冲突，这也是用springboot框架的时候，不用配置Tomcat的原因</p>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/K11yann">K11yann</a></span>
+  <span>Build on <a target="_blank" rel="noopener" href="https://github.com/rankangkang/hexo-theme-typo">Typo</a></span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>
